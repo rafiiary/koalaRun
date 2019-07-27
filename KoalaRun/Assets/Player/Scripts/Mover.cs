@@ -18,7 +18,7 @@ public class Mover : MonoBehaviour
     void Update()
     {
         float xMovement = Input.GetAxis("Horizontal");
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && rb.velocity.y == 0)
         {
             rb.velocity = new Vector2(xMovement * speed, jumpPower);
         }
