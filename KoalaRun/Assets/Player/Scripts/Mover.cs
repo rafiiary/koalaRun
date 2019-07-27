@@ -5,31 +5,24 @@ using UnityEngine;
 public class Mover : MonoBehaviour
 {
     public float speed;
+    public float jumpPower;
 
     private Vector2 moveVelocity;
     private Rigidbody2D rb;
-    private float yPosition;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        yPosition = rb.position.y;
     }
     
     void Update()
     {
         float xMovement = Input.GetAxis("Horizontal");
-        if (Input.GetAxis("Vertical") != 0)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            StartCoroutine(Jump());
+            rb.velocity = new Vector2(xMovement * speed, jumpPower);
         }
-        moveVelocity = new Vector2(xMovement, 0f) * speed;
-        rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
+        rb.velocity = new Vector2(xMovement * speed, rb.velocity.y);
     }
 
-    IEnumerator Jump() {
-        rb.AddForce(new Vector2(0f, 100f));
-        yield return new WaitForSecondsRealtime(0.1f);
-        rb.AddForce(new Vector2(0f, -100f));
-    }
 }
