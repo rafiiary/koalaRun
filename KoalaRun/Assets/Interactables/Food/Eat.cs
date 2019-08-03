@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Eat : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("We have collided with the player");
-            Destroy(this);
+            Destroy(this.gameObject);
+            PlayerAttributeController.addLeaf();
+            LeafTextController.updateLeavesText();
         }
     }
 }
