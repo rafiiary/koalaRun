@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using UnityEngine.SceneManagement;
+using TMPro;
 using UnityEngine;
 
 public class OptionsController : MonoBehaviour
@@ -13,6 +14,9 @@ public class OptionsController : MonoBehaviour
     /* List to hold all the options, the gameobjects are 
      * TextMeshPro objects */
     public GameObject[] options;
+
+    /* The names of the levels to load once an option is chosen */
+    public string[] levelNames;
   
     void Start()
     {
@@ -47,6 +51,10 @@ public class OptionsController : MonoBehaviour
                 currOption--;
             }
             updateOptionChosen();
+        }
+        else if (Input.GetKeyDown(KeyCode.Return))
+        {
+            SceneManager.LoadScene(levelNames[currOption]);
         }
 
     }
