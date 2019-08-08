@@ -4,15 +4,32 @@ using UnityEngine;
 
 public class TutorialCanvasController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Transform player;
+    public GameObject MovementPanel;
+    public GameObject jumpPanel;
+    private void Start()
     {
-        
+        //Movement panel should be visible from the start
+        MovementPanel.SetActive(true);
     }
-
-    // Update is called once per frame
     void Update()
     {
+        //Disable movement panel after player starts moving
+        if(MovementPanel.active == true && (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A)))
+        {
+            MovementPanel.SetActive(false);
+        }
+        if(jumpPanel != null && player.position.x > 0)
+        {
+            Debug.Log("Player at position x=0");
+            GameController.pauseGame();
+            jumpPanel.SetActive(true);
+        }
+        if(jumpPanel != null && Input.GetKeyDown(KeyCode.Space))
+        {
+            Destroy(jumpPanel);
+            GameController.resumeGame();
+        }
         
     }
 }
