@@ -216,6 +216,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpPower: 5
+  playerCollider: {fileID: 11156166}
+  groundCollider: {fileID: 739050742}
 --- !u!50 &11156165
 Rigidbody2D:
   serializedVersion: 4

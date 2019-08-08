@@ -1,10 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEngine.Tilemaps;
 using UnityEngine;
 
 public class Mover : MonoBehaviour
 {
     public float jumpPower;
+    public Collider2D playerCollider;
+    public TilemapCollider2D groundCollider;
 
     private Vector2 moveVelocity;
     private Rigidbody2D rb;
@@ -19,7 +20,7 @@ public class Mover : MonoBehaviour
     void Update()
     {
         float xMovement = Input.GetAxis("Horizontal");
-        if (Input.GetKeyDown(KeyCode.Space) && rb.velocity.y == 0)
+        if (Input.GetKeyDown(KeyCode.Space) && playerCollider.IsTouching(groundCollider))
         {
             rb.velocity = new Vector2(xMovement * speed, jumpPower);
         }

@@ -11,6 +11,7 @@ public class TutorialCanvasController : MonoBehaviour
     {
         //Movement panel should be visible from the start
         MovementPanel.SetActive(true);
+        GameController.pauseGame();
     }
     void Update()
     {
@@ -18,6 +19,7 @@ public class TutorialCanvasController : MonoBehaviour
         if(MovementPanel.active == true && (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A)))
         {
             MovementPanel.SetActive(false);
+            GameController.resumeGame();
         }
         if(jumpPanel != null && player.position.x > 0)
         {
