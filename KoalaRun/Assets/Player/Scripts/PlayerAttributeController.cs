@@ -6,6 +6,7 @@ public class PlayerAttributeController : MonoBehaviour
 {
     public static int health;
     public static int leaves;
+    public static int breath;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +18,6 @@ public class PlayerAttributeController : MonoBehaviour
     public static void addLeaf()
     {
         leaves++;
-        Debug.Log("The number of leaves are now:" + leaves.ToString());
     }
 
     public static int Leaves
@@ -39,5 +39,30 @@ public class PlayerAttributeController : MonoBehaviour
     public static void addHealth()
     {
         health++;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("poison"))
+        {
+            StartCoroutine(startPoisoning());
+        }
+    }
+
+    //Person's breath starts going away
+    IEnumerator startPoisoning()
+    {
+        if(breath > 0)
+        {
+            breath -= 1;
+            yield return new WaitForSecondsRealtime(0.01f);
+        }
+    }
+    private void Update()
+    {
+        if(breath <= 0)
+        {
+            removeHealth();   
+        }
     }
 }

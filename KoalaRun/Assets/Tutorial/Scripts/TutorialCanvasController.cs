@@ -8,14 +8,17 @@ public class TutorialCanvasController : MonoBehaviour
     public GameObject MovementPanel;
     public GameObject jumpPanel;
     public GameObject leafPanel;
+    public GameObject poisonGasPanel;
 
     bool leafPanelShown;
+    bool poisonGasPanelShown;
     private void Start()
     {
         //Movement panel should be visible from the start
         MovementPanel.SetActive(true);
         GameController.pauseGame();
         leafPanelShown = false;
+        poisonGasPanelShown = false;
     }
     void Update()
     {
@@ -44,6 +47,17 @@ public class TutorialCanvasController : MonoBehaviour
         if(leafPanel != null && leafPanelShown && Input.GetKeyDown(KeyCode.Space))
         {
             Destroy(leafPanel);
+            GameController.resumeGame();
+        }
+        if(poisonGasPanel != null && player.position.x > 34)
+        {
+            GameController.pauseGame();
+            poisonGasPanelShown = true;
+            poisonGasPanel.SetActive(true);
+        }
+        if(poisonGasPanel != null && poisonGasPanelShown && Input.GetKeyDown(KeyCode.Space))
+        {
+            Destroy(poisonGasPanel);
             GameController.resumeGame();
         }
         
