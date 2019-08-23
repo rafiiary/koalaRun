@@ -14,11 +14,16 @@ public class PoisonGasDamage : MonoBehaviour
     {
         playerBreath = 100;
         breathSlider.value = 0;
+        breathSlider.gameObject.SetActive(false);
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
+            breathSlider.gameObject.SetActive(true);
+            if (breathe != null){
+                StopCoroutine(breathe);
+            }
             Debug.Log("Starting suffocation");
             suffer = StartCoroutine(Suffocate());
         }
@@ -58,11 +63,9 @@ public class PoisonGasDamage : MonoBehaviour
             breathSlider.value = 0;
             PlayerAttributeController.removeHealth();
         }
-        else if (playerBreath > 100)
+        else if (playerBreath == 100)
         {
-            playerBreath = 100;
-            breathSlider.value = 0;
-            StopCoroutine(breathe);
+            breathSlider.gameObject.SetActive(false);
         }
     }
 }
