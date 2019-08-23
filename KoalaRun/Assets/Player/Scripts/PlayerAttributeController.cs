@@ -32,6 +32,7 @@ public class PlayerAttributeController : MonoBehaviour
     /* Remove a health in case player died */
     public static void removeHealth()
     {
+        Debug.Log("Removed health");
         health--;
     }
 
@@ -41,28 +42,4 @@ public class PlayerAttributeController : MonoBehaviour
         health++;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("poison"))
-        {
-            StartCoroutine(startPoisoning());
-        }
-    }
-
-    //Person's breath starts going away
-    IEnumerator startPoisoning()
-    {
-        if(breath > 0)
-        {
-            breath -= 1;
-            yield return new WaitForSecondsRealtime(0.01f);
-        }
-    }
-    private void Update()
-    {
-        if(breath <= 0)
-        {
-            removeHealth();   
-        }
-    }
 }
